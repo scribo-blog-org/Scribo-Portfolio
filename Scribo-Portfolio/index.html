@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Scribo — Full-Stack Publishing Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <header class="header">
+      <div class="container nav">
+        <div class="logo">
+          <a href="#hero">
+            <img
+              class="logo-primary"
+              src="./assets/logo-icon.svg"
+              alt="Scribo icon"
+            />
+            <object
+              class="animated-logo"
+              data="./assets/full-logo-text-icon.svg"
+              type="image/svg+xml"
+              aria-label="Scribo"
+            ></object>
+          </a>
+        </div>
+
+        <nav>
+          <a href="#overview"> Overview </a>
+
+          <a href="#workflow"> Workflow </a>
+
+          <a href="#architecture"> Architecture </a>
+
+          <a href="#gallery"> Gallery </a>
+        </nav>
+
+        <div class="nav-actions">
+          <a
+            href="https://github.com/scribo-blog-org"
+            class="nav-button"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+
+          <a
+            href="https://scribo-blog.vercel.app/posts"
+            class="nav-button nav-demo"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Visit site ↗
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+
+      <section class="hero" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="badge">Full-Stack Engineering Project</div>
+
+            <p class="author-line">
+              Independently designed and built by
+              <strong>Maks Kosianchuk</strong>
+            </p>
+
+            <h1>Scribo</h1>
+
+            <h2>Full-Stack Publishing Platform built from scratch</h2>
+
+            <p>
+              Full-Stack News & Publishing Platform built from scratch A modern
+              platform for creating, publishing and interacting with news
+              content. Built with React, Node.js, MongoDB and AWS.
+            </p>
+
+            <div class="tech-line">
+              React
+              <span>•</span>
+
+              Node.js
+              <span>•</span>
+
+              MongoDB
+              <span>•</span>
+
+              AWS S3
+              <span>•</span>
+              Vercel
+              <span>•</span>
+              Git Flow
+            </div>
+
+            <div class="hero-actions">
+              <a
+                class="primary-btn"
+                href="https://scribo-blog.vercel.app/posts"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live Demo
+              </a>
+
+              <a
+                class="secondary-btn"
+                href="https://github.com/scribo-blog-org"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+
+        <div class="hero-preview-wrapper">
+          <div class="hero-preview">
+            <div class="window">
+              <div class="window-top">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <img src="assets/profile-page.png" alt="Scribo interface" />
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- OVERVIEW -->
+
+      <section id="overview" class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Overview </span>
+
+            <h2>A publishing system, not just a blog</h2>
+
+            <p>
+              A complete news platform, not just a blog Scribo combines content
+              publishing, user interaction and administration into a single
+              platform. Users can create accounts, verify their email, follow
+              authors, save articles, like and comment on posts, and receive
+              notifications. Authors can create and manage publications through
+              a rich text editor, while administrators manage content,
+              permissions and platform activity. Scribo was independently
+              designed and built end to end by Maks Kosianchuk.
+            </p>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <h3 data-count="4">4</h3>
+
+              <p>User roles</p>
+            </div>
+
+            <div class="stat-card">
+              <h3 id="code-lines">—</h3>
+              <p>Lines of Code</p>
+            </div>
+
+            <div class="stat-card">
+              <h3 data-count="6">6</h3>
+
+              <p>MongoDB Entities</p>
+            </div>
+
+            <div class="stat-card">
+              <h3 data-count="2" data-suffix="+">2+</h3>
+
+              <p>Years in Development</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORKFLOW -->
+
+      <section id="workflow" class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Product Workflow </span>
+
+            <h2>How Scribo works</h2>
+
+            <p>
+              The platform connects content creation, storage, publishing and
+              user interaction into one workflow.
+            </p>
+          </div>
+
+          <div class="workflow">
+            <div class="workflow-progress" aria-hidden="true"></div>
+
+            <div class="workflow-step">
+              <h3>01</h3>
+
+              <p>User creates an account and verifies email.</p>
+            </div>
+
+            <div class="workflow-step">
+              <h3>02</h3>
+
+              <p>Author creates articles using rich text editor.</p>
+            </div>
+
+            <div class="workflow-step">
+              <h3>03</h3>
+
+              <p>Images are uploaded to cloud storage.</p>
+            </div>
+
+            <div class="workflow-step">
+              <h3>04</h3>
+
+              <p>Published content receives comments and interactions.</p>
+            </div>
+
+            <div class="workflow-step">
+              <h3>05</h3>
+
+              <p>Administrators monitor platform activity.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODULES -->
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-title">
+            <span> Core Modules </span>
+
+            <h2>Platform functionality</h2>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <h3>Authentication</h3>
+
+              <p>
+                JWT authentication, email verification and protected routes.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Content Management</h3>
+
+              <p>
+                Article creation, rich text editing, categories and image
+                uploads.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>User Interaction</h3>
+
+              <p>Comments, replies, likes and notifications.</p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Role System</h3>
+
+              <p>
+                Different access levels: user, author, admin and technical
+                administrator.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Administration</h3>
+
+              <p>Manage users, posts, categories and platform settings.</p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Activity Tracking</h3>
+
+              <p>Centralized logs for monitoring important actions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ARCHITECTURE -->
+
+      <section id="architecture" class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Architecture </span>
+
+            <h2>How the system is built</h2>
+
+            <p>
+              The application is separated into frontend, backend services,
+              authorization layers and external storage.
+            </p>
+          </div>
+
+          <div class="architecture-box">
+            <div class="arch-node">React Application</div>
+
+            <div class="arrow">↓</div>
+
+            <div class="arch-node">REST API</div>
+
+            <div class="arrow">↓</div>
+
+            <div class="arch-node">Express Backend</div>
+
+            <div class="arrow">↓</div>
+
+            <div class="arch-row">
+              <div class="arch-node">Validation Layer</div>
+
+              <div class="arch-node">Authentication Middleware</div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="arch-row">
+              <div class="arch-node">Permission System</div>
+
+              <div class="arch-node">Business Logic</div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="arch-row">
+              <div class="arch-node">MongoDB</div>
+
+              <div class="arch-node">AWS S3</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNOLOGY STACK -->
+
+      <section class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Technology Stack </span>
+
+            <h2>Tools behind Scribo</h2>
+          </div>
+
+          <div class="stack-grid">
+            <div class="stack-card">
+              <h3>Frontend</h3>
+
+              <ul>
+                <li>React</li>
+
+                <li>Redux Toolkit</li>
+
+                <li>SCSS Architecture</li>
+
+                <li>Reusable Components</li>
+              </ul>
+            </div>
+
+            <div class="stack-card">
+              <h3>Backend</h3>
+
+              <ul>
+                <li>Node.js</li>
+
+                <li>Express</li>
+
+                <li>REST API</li>
+
+                <li>JWT Authentication</li>
+
+                <li>OpenAPI / Swagger</li>
+              </ul>
+            </div>
+
+            <div class="stack-card">
+              <h3>Infrastructure</h3>
+
+              <ul>
+                <li>MongoDB</li>
+
+                <li>AWS S3</li>
+
+                <li>Cloud Storage</li>
+
+                <li>Vercel</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENGINEERING -->
+
+      <section class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Engineering Highlights </span>
+
+            <h2>What was built</h2>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <h3>Backend Architecture</h3>
+
+              <p>
+                Designed REST API architecture with controllers, validation,
+                authentication middleware and database integration.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Frontend System</h3>
+
+              <p>
+                Created reusable React components, responsive layouts and rich
+                text editing workflow.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Security & Permissions</h3>
+
+              <p>
+                Implemented JWT authentication and role-based access control for
+                different user levels.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>API Documentation</h3>
+
+              <p>
+                Created Swagger API documentation with structured endpoint
+                references for backend integration and testing.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h3>Cloud Infrastructure</h3>
+
+              <p>
+                Integrated AWS S3 storage for uploaded media and file
+                management.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORE ENTITIES -->
+
+      <section class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Core Entities </span>
+
+            <h2>Data model</h2>
+          </div>
+
+          <div class="stack-grid">
+            <div class="stack-card">
+              <h3>Users</h3>
+
+              <p>
+                User accounts, profiles, passwords, avatars, subscriptions,
+                notifications and account settings.
+              </p>
+            </div>
+
+            <div class="stack-card">
+              <h3>Posts</h3>
+
+              <p>
+                Articles with title, content, images, metadata, likes and
+                publishing data.
+              </p>
+            </div>
+
+            <div class="stack-card">
+              <h3>Comments</h3>
+
+              <p>
+                Comment records with authors, post references, likes and nested
+                replies through parent IDs.
+              </p>
+            </div>
+
+            <div class="stack-card">
+              <h3>Categories</h3>
+
+              <p>
+                Content organization with category names, colors and metadata.
+              </p>
+            </div>
+
+            <div class="stack-card">
+              <h3>Email Verification</h3>
+
+              <p>
+                Temporary verification codes with expiration for account
+                security.
+              </p>
+            </div>
+
+            <div class="stack-card">
+              <h3>Logs</h3>
+
+              <p>
+                Platform activity records for tracking important user and admin
+                actions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+
+      <section id="gallery" class="section gallery">
+        <div class="container">
+          <div class="section-title">
+            <span> Product Screens </span>
+
+            <h2>Inside Scribo</h2>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src="assets/home-page.png" alt="Homepage" />
+
+              <p>Homepage</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/article-page.png" alt="Article page" />
+
+              <p>Article Page</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/create-post-page.png" alt="Editor" />
+
+              <p>Rich Text Editor</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/settings-page.png" alt="Settings" />
+
+              <p>Settings Page</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/comments.png" alt="Comments" />
+
+              <p>Comments</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/admin-panel-page.png" alt="Admin panel" />
+
+              <p>Administration Panel</p>
+            </div>
+
+            <div class="gallery-item">
+              <img src="assets/logs-page.png" alt="Logs" />
+
+              <p>Activity Logs</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHALLENGES -->
+
+      <section class="section">
+        <div class="container">
+          <div class="section-title">
+            <span> Challenges & Solutions </span>
+
+            <h2>Engineering decisions</h2>
+          </div>
+
+          <div class="challenge-grid">
+            <div class="challenge-card">
+              <h3>Nested Comments</h3>
+
+              <p>Implemented recursive comment structure with replies.</p>
+            </div>
+
+            <div class="challenge-card">
+              <h3>Rich Text Editor</h3>
+
+              <p>Integrated Lexical editor for structured article creation.</p>
+            </div>
+
+            <div class="challenge-card">
+              <h3>Authorization</h3>
+
+              <p>Created middleware-based permission checking.</p>
+            </div>
+
+            <div class="challenge-card">
+              <h3>Media Storage</h3>
+
+              <p>Integrated AWS S3 for image uploads.</p>
+            </div>
+
+            <div class="challenge-card">
+              <h3>Activity Logs</h3>
+
+              <p>Built centralized tracking system for administrators.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+        <div class="container">
+          <h2>Scribo</h2>
+
+          <p>Full-Stack Publishing Platform</p>
+
+          <p class="footer-author">
+            Portfolio project by Maks Kosianchuk — designed and built
+            independently.
+          </p>
+
+          <div class="footer-contact">
+            <a href="tel:+380990623593"> +380 99 062 35 93 </a>
+
+            <a href="mailto:mckos2005@gmail.com"> mckos2005@gmail.com </a>
+          </div>
+
+          <div class="footer-links">
+            <a
+              href="https://www.linkedin.com/in/%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC-%D0%BA%D0%BE%D1%81%D1%8F%D0%BD%D1%87%D1%83%D0%BA-556781328/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+
+            <a
+              href="https://github.com/scribo-blog-org"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub Organization
+            </a>
+
+            <a
+              href="https://github.com/scribo-blog-org/Scribo_frontend"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Frontend Repository
+            </a>
+
+            <a
+              href="https://github.com/scribo-blog-org/Scribo_backend"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Backend Repository
+            </a>
+
+            <a
+              href="https://scribo-blog.vercel.app/posts"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="scipt.js"></script>
+  </body>
+</html>
