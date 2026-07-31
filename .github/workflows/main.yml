@@ -1,0 +1,50 @@
+name: Update Code Statistics
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout portfolio
+        uses: actions/checkout@v4
+
+      - name: Checkout frontend
+        uses: actions/checkout@v4
+        with:
+          repository: scribo-blog-org/Scribo_frontend
+          ref: master
+          path: repos/frontend
+
+      - name: Checkout backend
+        uses: actions/checkout@v4
+        with:
+          repository: scribo-blog-org/Scribo_backend
+          ref: master
+          path: repos/backend
+
+      - name: Run code counter
+        run: node scripts/count-code.js
+
+      - name: Commit updated statistics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add code-stats.json
+
+          if git diff --cached --quiet; then
+            echo "Statistics haven't changed."
+            exit 0
+          fi
+
+          git commit -m "Update code statistics"
+          git push
