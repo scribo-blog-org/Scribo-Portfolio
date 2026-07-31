@@ -118,8 +118,6 @@ async function loadCodeStats() {
 
     codeStats = await response.json();
 
-    console.log('Code statistics loaded:', codeStats);
-
     // Если пользователь уже дошёл до статистики,
     // запускаем анимацию сразу после загрузки JSON.
     if (statsSectionVisible) {
@@ -188,8 +186,8 @@ function animateCodeStats() {
   const linesElement =
     document.getElementById('code-lines');
 
-  const yearsElement =
-    document.getElementById('development-years');
+  const commitsElement =
+    document.getElementById('total-commits');
 
   const coffeeElement =
     document.getElementById('coffee-cups');
@@ -201,7 +199,6 @@ function animateCodeStats() {
     filesElement,
     codeStats.total.files,
     {
-      suffix: '+',
       duration: 1400
     }
   );
@@ -213,13 +210,11 @@ function animateCodeStats() {
     linesElement,
     codeStats.total.lines,
     {
-      suffix: '+',
       duration: 1800
     }
   );
 
-
-  // DEVELOPMENT YEARS
+  // DEVELOPMENT TIME (for coffee calculation)
 
   const firstAction =
     new Date(codeStats.firstAction);
@@ -236,20 +231,15 @@ function animateCodeStats() {
       millisecondsPerDay
     );
 
-  const developmentYears =
-    developmentDays / 365.2425;
-
+  // TOTAL COMMITS
 
   animateNumber(
-    yearsElement,
-    developmentYears,
+    commitsElement,
+    codeStats.commits,
     {
-      suffix: '+',
-      decimals: 1,
       duration: 1600
     }
   );
-
 
   // COFFEE
 
@@ -263,20 +253,7 @@ function animateCodeStats() {
     coffeeElement,
     coffeeCups,
     {
-      suffix: '+',
       duration: 1800
-    }
-  );
-
-
-  console.log(
-    'Code statistics animated:',
-    {
-      files: codeStats.total.files,
-      lines: codeStats.total.lines,
-      developmentDays,
-      developmentYears,
-      coffeeCups
     }
   );
 }
