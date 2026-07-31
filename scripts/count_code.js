@@ -34,7 +34,10 @@ function countDirectory(directory) {
     let lines = 0;
 
     if (!fs.existsSync(directory)) {
-        return { files, lines };
+        return {
+            files,
+            lines
+        };
     }
 
     const entries = fs.readdirSync(directory, {
@@ -85,6 +88,11 @@ function countDirectory(directory) {
     };
 }
 
+
+// =========================
+// CODE STATISTICS
+// =========================
+
 const stats = {
     frontend: countDirectory(
         repositories[0].path
@@ -94,6 +102,11 @@ const stats = {
         repositories[1].path
     )
 };
+
+
+// =========================
+// TOTAL
+// =========================
 
 stats.total = {
     files:
@@ -105,17 +118,55 @@ stats.total = {
         stats.backend.lines
 };
 
-stats.firstAction = process.env.FIRST_ACTION || null;
-stats.updatedAt = new Date().toISOString();
 
-const outputPath = path.resolve(
-    'code-stats.json'
+// =========================
+// FIRST ACTION
+// =========================
+
+stats.firstAction =
+    process.env.FIRST_ACTION || null;
+
+
+// =========================
+// COMMITS
+// =========================
+
+stats.commits = Number(
+    process.env.TOTAL_COMMITS || 0
 );
+
+
+// =========================
+// UPDATED AT
+// =========================
+
+stats.updatedAt =
+    new Date().toISOString();
+
+
+// =========================
+// WRITE JSON
+// =========================
+
+const outputPath =
+    path.resolve('code-stats.json');
 
 fs.writeFileSync(
     outputPath,
     JSON.stringify(stats, null, 2) + '\n'
 );
 
+
+// =========================
+// CONSOLE
+// =========================
+
 console.log('Code statistics:');
-console.log(JSON.stringify(stats, null, 2));
+
+console.log(
+    JSON.stringify(
+        stats,
+        null,
+        2
+    )
+);

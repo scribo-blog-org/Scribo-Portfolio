@@ -49,31 +49,6 @@ document.querySelectorAll('.stat-card, .workflow-step, .feature-card, .stack-car
   });
 });
 
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    entry.target.querySelectorAll('[data-count]').forEach((counter) => {
-      const target = Number(counter.dataset.count);
-      const suffix = counter.dataset.suffix || '';
-      if (reducedMotion) {
-        counter.textContent = `${target}${suffix}`;
-        return;
-      }
-      const start = performance.now();
-      const duration = 1200;
-      const animate = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        counter.textContent = `${Math.round(target * eased)}${suffix}`;
-        if (progress < 1) requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    });
-    counterObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.45 });
-
-document.querySelectorAll('.stats').forEach((stats) => counterObserver.observe(stats));
 
 const workflow = document.querySelector('.workflow');
 const workflowProgress = document.querySelector('.workflow-progress');
@@ -128,7 +103,10 @@ document.querySelectorAll('.gallery-item img, .window img').forEach((image) => {
 });
 
 
-async function updateCodeStats() {
+let codeStats = null;
+let codeStatsAnimated = false;
+
+async function loadCodeStats() {
   try {
     const response = await fetch('./code-stats.json', {
       cache: 'no-cache'
@@ -138,66 +116,210 @@ async function updateCodeStats() {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    const stats = await response.json();
+    codeStats = await response.json();
 
-    const filesElement = document.getElementById('code-files');
-    const linesElement = document.getElementById('code-lines');
-    const yearsElement = document.getElementById('development-years');
-    const coffeeElement = document.getElementById('coffee-cups');
+    console.log('Code statistics loaded:', codeStats);
 
-    // Total source files
-    if (filesElement) {
-      filesElement.textContent =
-        stats.total.files.toLocaleString() + '+';
+    // Если пользователь уже дошёл до статистики,
+    // запускаем анимацию сразу после загрузки JSON.
+    if (statsSectionVisible) {
+      animateCodeStats();
     }
-
-    // Total lines of code
-    if (linesElement) {
-      linesElement.textContent =
-        stats.total.lines.toLocaleString() + '+';
-    }
-
-    // Development time
-    const firstAction = new Date(stats.firstAction);
-    const now = new Date();
-
-    const millisecondsPerDay = 1000 * 60 * 60 * 24;
-
-    const developmentDays = Math.floor(
-      (now - firstAction) / millisecondsPerDay
-    );
-
-    const developmentYears = developmentDays / 365.2425;
-
-    if (yearsElement) {
-      yearsElement.textContent =
-        developmentYears.toFixed(1) + '+';
-    }
-
-    // Coffee
-    const coffeeCups = Math.floor(
-      developmentDays / 3
-    );
-
-    if (coffeeElement) {
-      coffeeElement.textContent =
-        coffeeCups.toLocaleString() + '+';
-    }
-
-    console.log('Code statistics loaded:', {
-      files: stats.total.files,
-      lines: stats.total.lines,
-      developmentDays,
-      developmentYears,
-      coffeeCups
-    });
 
   } catch (error) {
-    console.error(
-      'Failed to load code statistics:',
-      error
-    );
+    console.error('Failed to load code statistics:', error);
   }
 }
 
-updateCodeStats();
+
+function animateNumber(element, target, options = {}) {
+  if (!element) return;
+
+  const {
+    suffix = '',
+    decimals = 0,
+    duration = 1200
+  } = options;
+
+  if (reducedMotion) {
+    element.textContent =
+      decimals > 0
+        ? target.toFixed(decimals) + suffix
+        : target.toLocaleString() + suffix;
+
+    return;
+  }
+
+  const start = performance.now();
+
+  function animate(now) {
+    const progress = Math.min(
+      (now - start) / duration,
+      1
+    );
+
+    const eased =
+      1 - Math.pow(1 - progress, 3);
+
+    const current = target * eased;
+
+    element.textContent =
+      decimals > 0
+        ? current.toFixed(decimals) + suffix
+        : Math.floor(current).toLocaleString() + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+
+function animateCodeStats() {
+  if (!codeStats || codeStatsAnimated) return;
+
+  codeStatsAnimated = true;
+
+  const filesElement =
+    document.getElementById('code-files');
+
+  const linesElement =
+    document.getElementById('code-lines');
+
+  const yearsElement =
+    document.getElementById('development-years');
+
+  const coffeeElement =
+    document.getElementById('coffee-cups');
+
+
+  // FILES
+
+  animateNumber(
+    filesElement,
+    codeStats.total.files,
+    {
+      suffix: '+',
+      duration: 1400
+    }
+  );
+
+
+  // LINES
+
+  animateNumber(
+    linesElement,
+    codeStats.total.lines,
+    {
+      suffix: '+',
+      duration: 1800
+    }
+  );
+
+
+  // DEVELOPMENT YEARS
+
+  const firstAction =
+    new Date(codeStats.firstAction);
+
+  const now =
+    new Date();
+
+  const millisecondsPerDay =
+    1000 * 60 * 60 * 24;
+
+  const developmentDays =
+    Math.floor(
+      (now - firstAction) /
+      millisecondsPerDay
+    );
+
+  const developmentYears =
+    developmentDays / 365.2425;
+
+
+  animateNumber(
+    yearsElement,
+    developmentYears,
+    {
+      suffix: '+',
+      decimals: 1,
+      duration: 1600
+    }
+  );
+
+
+  // COFFEE
+
+  const coffeeCups =
+    Math.floor(
+      developmentDays / 3
+    );
+
+
+  animateNumber(
+    coffeeElement,
+    coffeeCups,
+    {
+      suffix: '+',
+      duration: 1800
+    }
+  );
+
+
+  console.log(
+    'Code statistics animated:',
+    {
+      files: codeStats.total.files,
+      lines: codeStats.total.lines,
+      developmentDays,
+      developmentYears,
+      coffeeCups
+    }
+  );
+}
+
+
+// Показывает, была ли секция Statistics
+// уже показана пользователю.
+let statsSectionVisible = false;
+
+const statsSection =
+  document.querySelector('.stats');
+
+if (statsSection) {
+
+  const statsObserver =
+    new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (!entry.isIntersecting) return;
+
+          statsSectionVisible = true;
+
+          animateCodeStats();
+
+          statsObserver.unobserve(
+            entry.target
+          );
+
+        });
+
+      },
+      {
+        threshold: 0.45
+      }
+    );
+
+  statsObserver.observe(statsSection);
+}
+
+
+// JSON загружается сразу,
+// но цифры НЕ анимируются,
+// пока пользователь не доскроллит до Statistics.
+loadCodeStats();

@@ -264,16 +264,16 @@ nav a:hover {
 }
 
 .hero h1 {
-    font-size: clamp(76px,10vw,150px);
-    letter-spacing: -.045em;
-    line-height: .82;
-    margin-left: -.04em;
+    font-size: clamp(76px, 10vw, 150px);
+    letter-spacing: -.02em;
+    line-height: .9;
+    margin-left: -.02em;
 }
 
 .hero h2 {
-    font-size: clamp(30px,3.5vw,52px);
-    letter-spacing: -.035em;
-    line-height: 1.06;
+    font-size: clamp(30px, 3.5vw, 52px);
+    letter-spacing: -.015em;
+    line-height: 1.1;
     margin-top: 25px;
     max-width: 620px;
 }
@@ -627,8 +627,8 @@ nav a:hover {
 .stat-card h3 {
     color: var(--accent);
     font-size: 50px;
-    letter-spacing: -.08em;
-    line-height: 1;
+    letter-spacing: -.035em;
+    line-height: 1.05;
 }
 
 .stat-card p,.feature-card p,.stack-card p,.challenge-card p {
