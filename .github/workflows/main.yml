@@ -23,6 +23,7 @@ jobs:
           repository: scribo-blog-org/Scribo_frontend
           ref: master
           path: repos/frontend
+          fetch-depth: 0
 
       - name: Checkout backend
         uses: actions/checkout@v4
@@ -30,8 +31,29 @@ jobs:
           repository: scribo-blog-org/Scribo_backend
           ref: master
           path: repos/backend
+          fetch-depth: 0
+
+      - name: Find first commits
+        run: |
+          FRONTEND_FIRST_COMMIT=$(git -C repos/frontend log --reverse --format=%aI | head -n 1)
+          BACKEND_FIRST_COMMIT=$(git -C repos/backend log --reverse --format=%aI | head -n 1)
+
+          echo "Frontend first commit: $FRONTEND_FIRST_COMMIT"
+          echo "Backend first commit: $BACKEND_FIRST_COMMIT"
+
+          if [ "$FRONTEND_FIRST_COMMIT" \< "$BACKEND_FIRST_COMMIT" ]; then
+            FIRST_ACTION="$FRONTEND_FIRST_COMMIT"
+          else
+            FIRST_ACTION="$BACKEND_FIRST_COMMIT"
+          fi
+
+          echo "First action: $FIRST_ACTION"
+
+          echo "FIRST_ACTION=$FIRST_ACTION" >> "$GITHUB_ENV"
 
       - name: Run code counter
+        env:
+          FIRST_ACTION: ${{ env.FIRST_ACTION }}
         run: node scripts/count_code.js
 
       - name: Commit updated statistics
