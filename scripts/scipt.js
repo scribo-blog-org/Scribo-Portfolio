@@ -127,3 +127,77 @@ document.querySelectorAll('.gallery-item img, .window img').forEach((image) => {
   });
 });
 
+
+async function updateCodeStats() {
+  try {
+    const response = await fetch('./code-stats.json', {
+      cache: 'no-cache'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const stats = await response.json();
+
+    const filesElement = document.getElementById('code-files');
+    const linesElement = document.getElementById('code-lines');
+    const yearsElement = document.getElementById('development-years');
+    const coffeeElement = document.getElementById('coffee-cups');
+
+    // Total source files
+    if (filesElement) {
+      filesElement.textContent =
+        stats.total.files.toLocaleString() + '+';
+    }
+
+    // Total lines of code
+    if (linesElement) {
+      linesElement.textContent =
+        stats.total.lines.toLocaleString() + '+';
+    }
+
+    // Development time
+    const firstAction = new Date(stats.firstAction);
+    const now = new Date();
+
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+    const developmentDays = Math.floor(
+      (now - firstAction) / millisecondsPerDay
+    );
+
+    const developmentYears = developmentDays / 365.2425;
+
+    if (yearsElement) {
+      yearsElement.textContent =
+        developmentYears.toFixed(1) + '+';
+    }
+
+    // Coffee
+    const coffeeCups = Math.floor(
+      developmentDays / 3
+    );
+
+    if (coffeeElement) {
+      coffeeElement.textContent =
+        coffeeCups.toLocaleString() + '+';
+    }
+
+    console.log('Code statistics loaded:', {
+      files: stats.total.files,
+      lines: stats.total.lines,
+      developmentDays,
+      developmentYears,
+      coffeeCups
+    });
+
+  } catch (error) {
+    console.error(
+      'Failed to load code statistics:',
+      error
+    );
+  }
+}
+
+updateCodeStats();
