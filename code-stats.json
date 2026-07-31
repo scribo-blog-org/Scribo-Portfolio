@@ -1,0 +1,15 @@
+{
+  "frontend": {
+    "files": 126,
+    "lines": 12096
+  },
+  "backend": {
+    "files": 101,
+    "lines": 5038
+  },
+  "total": {
+    "files": 227,
+    "lines": 17134
+  },
+  "updatedAt": "2026-07-31T16:22:45.448Z"
+}
