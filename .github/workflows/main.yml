@@ -32,7 +32,7 @@ jobs:
           path: repos/backend
 
       - name: Run code counter
-        run: node scripts/count-code.js
+        run: node scripts/count_code.js
 
       - name: Commit updated statistics
         run: |
