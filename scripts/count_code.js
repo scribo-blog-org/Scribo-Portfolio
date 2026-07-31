@@ -105,6 +105,7 @@ stats.total = {
         stats.backend.lines
 };
 
+stats.firstAction = process.env.FIRST_ACTION || null;
 stats.updatedAt = new Date().toISOString();
 
 const outputPath = path.resolve(
