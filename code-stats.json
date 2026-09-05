@@ -1,17 +1,17 @@
 {
   "frontend": {
-    "files": 137,
-    "lines": 13917
+    "files": 152,
+    "lines": 16675
   },
   "backend": {
-    "files": 99,
-    "lines": 4653
+    "files": 118,
+    "lines": 6730
   },
   "total": {
-    "files": 236,
-    "lines": 18570
+    "files": 270,
+    "lines": 23405
   },
   "firstAction": "2024-03-04T17:46:00+02:00",
-  "commits": 818,
-  "updatedAt": "2026-09-04T07:27:23.877Z"
+  "commits": 839,
+  "updatedAt": "2026-09-05T07:08:56.903Z"
 }
